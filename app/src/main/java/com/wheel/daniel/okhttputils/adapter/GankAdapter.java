@@ -1,6 +1,7 @@
 package com.wheel.daniel.okhttputils.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.RecyclerView;
@@ -10,7 +11,9 @@ import android.view.ViewGroup;
 
 import com.bumptech.glide.Glide;
 import com.wheel.daniel.okhttputils.R;
+import com.wheel.daniel.okhttputils.activity.DownLoadActivity;
 import com.wheel.daniel.okhttputils.bean.Gank;
+import com.wheel.daniel.okhttputils.utils.CommonStringUtils;
 
 import java.util.List;
 
@@ -48,11 +51,21 @@ public class GankAdapter extends RecyclerView.Adapter<BaseHolder> {
 
     @Override
     public void onBindViewHolder(@NonNull BaseHolder holder, int position) {
-        Gank gank = mGanks.get(position);
+        final Gank gank = mGanks.get(position);
         if (holder instanceof NormalHolder) {
             ((NormalHolder) holder).descText.setText(gank.desc);
             ((NormalHolder) holder).authorText.setText(gank.who);
             Glide.with(mContext).load(gank.url).asBitmap().into(((NormalHolder) holder).mImageView);
+            ((NormalHolder) holder).mImageView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent(mContext, DownLoadActivity.class);
+                    intent.putExtra(CommonStringUtils.URL, gank.url);
+                    intent.putExtra(CommonStringUtils.NAME, gank.desc);
+                    mContext.startActivity(intent);
+                }
+            });
+
         }
     }
 

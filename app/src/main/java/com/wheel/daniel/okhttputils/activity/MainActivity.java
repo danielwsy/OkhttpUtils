@@ -1,4 +1,4 @@
-package com.wheel.daniel.okhttputils;
+package com.wheel.daniel.okhttputils.activity;
 
 import android.arch.lifecycle.Lifecycle;
 import android.arch.lifecycle.LifecycleOwner;
@@ -7,13 +7,14 @@ import android.arch.lifecycle.Observer;
 import android.arch.lifecycle.ViewModelProviders;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
-import android.support.v4.widget.SwipeRefreshLayout;
+
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.view.View;
 
+import com.wheel.daniel.okhttputils.BaseActivity;
+import com.wheel.daniel.okhttputils.R;
 import com.wheel.daniel.okhttputils.bean.Gank;
 import com.wheel.daniel.okhttputils.bean.GankContentBean;
 import com.wheel.daniel.okhttputils.view.LoadingView;
@@ -25,7 +26,7 @@ import com.wheel.daniel.okhttputils.viewmodel.GankObserver;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MainActivity extends FragmentActivity implements LifecycleOwner {
+public class MainActivity extends BaseActivity implements LifecycleOwner {
 
     private GankObserver observer;
     private GankModel gankModel;

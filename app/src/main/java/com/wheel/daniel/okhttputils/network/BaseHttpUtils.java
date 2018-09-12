@@ -1,14 +1,23 @@
 package com.wheel.daniel.okhttputils.network;
 
 import android.content.Context;
+import android.os.Environment;
 
 import com.wheel.daniel.okhttputils.HiApplication;
 
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.Hashtable;
 import java.util.concurrent.TimeUnit;
 
 import okhttp3.Cache;
+import okhttp3.Call;
+import okhttp3.Callback;
 import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
@@ -74,7 +83,7 @@ public class BaseHttpUtils {
         return builder.build();
     }
 
-    private OkHttpClient.Builder buildDefalutClient(Context context) {
+    private static OkHttpClient.Builder buildDefalutClient(Context context) {
         OkHttpClient.Builder builder = new OkHttpClient.Builder();
         builder.cache(new Cache(context.getCacheDir(), CACHE_SIZE));
         builder.connectTimeout(NETWORK_TIME_OUT, TimeUnit.SECONDS);
@@ -83,5 +92,88 @@ public class BaseHttpUtils {
         return builder;
     }
 
+    /**
+     * 下载文件
+     *
+     * @param url          下载的链接
+     * @param destFileName 下载文件名称
+     * @param listener     下载监听
+     */
+    public static void downLoad(String url, final String destFileDir, final String destFileName, final OnDownloadListener listener) {
+        if (okHttpClient == null) {
+            OkHttpClient.Builder okBuilder = buildDefalutClient(HiApplication.getContext());
+            okHttpClient = okBuilder.build();
+        }
+        Request request = new Request.Builder().url(url).build();
+        okHttpClient.newCall(request).enqueue(new Callback() {
+            @Override
+            public void onFailure(Call call, IOException e) {
+                listener.onDownloadFailed(e);
+            }
+
+            @Override
+            public void onResponse(Call call, Response response) throws IOException {
+                onDownLoad(response, destFileDir, destFileName, listener);
+            }
+        });
+    }
+
+    private static void onDownLoad(Response response, String destFileDir, String destFileName, OnDownloadListener listener) throws IOException {
+        InputStream is = null;
+        byte[] buf = new byte[2048];
+        int len = 0;
+        FileOutputStream fos = null;
+        // 储存下载文件的目录
+        File dir = new File(destFileDir);
+        if (!dir.exists()) {
+            dir.mkdir();
+        }
+        File file = new File(dir, destFileName);
+        try {
+            is = response.body().byteStream();
+            long total = response.body().contentLength();
+            fos = new FileOutputStream(file);
+            long sum = 0;
+            while ((len = is.read(buf)) != -1) {
+                fos.write(buf, 0, len);
+                sum += len;
+                int progress = (int) (sum * 1.0f / total * 100);
+                // 下载中更新进度条
+                listener.onDownloading(progress);
+            }
+            fos.flush();
+            // 下载完成
+            listener.onDownloadSuccess(file);
+        } catch (Exception e) {
+            listener.onDownloadFailed(e);
+        } finally {
+            if (is != null) {
+                is.close();
+            }
+            if (fos != null) {
+                fos.close();
+            }
+        }
+    }
+
+    public interface OnDownloadListener {
+
+        /**
+         * @param e 下载异常信息
+         */
+        void onDownloadFailed(Exception e);
+
+        /**
+         * @param progress 下载进度
+         */
+        void onDownloading(int progress);
+
+        /**
+         * @param file 下载成功后的文件
+         */
+        void onDownloadSuccess(File file);
+
+
+    }
 
 }

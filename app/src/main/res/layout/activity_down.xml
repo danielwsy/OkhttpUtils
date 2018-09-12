@@ -6,21 +6,17 @@
     android:layout_height="match_parent"
     tools:context="com.wheel.daniel.okhttputils.activity.MainActivity">
 
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/recycleview"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
-    </android.support.v7.widget.RecyclerView>
-
-
-    <com.wheel.daniel.okhttputils.view.LoadingView
-        android:id="@+id/loading"
+    <ImageView
+        android:id="@+id/iv_meinv"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
-        android:visibility="gone">
+        android:layout_centerInParent="true" />
 
-    </com.wheel.daniel.okhttputils.view.LoadingView>
+    <Button
+        android:id="@+id/bt_start"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_alignParentBottom="true" />
+
 
 </RelativeLayout>
