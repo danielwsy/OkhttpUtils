@@ -17,6 +17,4 @@ public class ToastUtils {
         if (TextUtils.isEmpty(words)) return;
         Toast.makeText(HiApplication.getContext(), words, Toast.LENGTH_SHORT).show();
     }
-
-
 }

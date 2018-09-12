@@ -19,6 +19,7 @@ import com.wheel.daniel.okhttputils.BaseActivity;
 import com.wheel.daniel.okhttputils.R;
 import com.wheel.daniel.okhttputils.network.BaseHttpUtils;
 import com.wheel.daniel.okhttputils.utils.CommonStringUtils;
+import com.wheel.daniel.okhttputils.utils.StorageLocationUtils;
 import com.wheel.daniel.okhttputils.utils.ToastUtils;
 
 import java.io.File;
@@ -34,7 +35,7 @@ public class DownLoadActivity extends BaseActivity implements View.OnClickListen
     private ProgressDialog progressDialog;
     String mUrl;
     String mName;
-    private Button mBtStart;
+    private Button mBtStart, mBtLocation;
     private static final int DOWNFAILED = 101;
     private static final int DOWNSUCCEED = 102;
     File mFile;
@@ -80,7 +81,9 @@ public class DownLoadActivity extends BaseActivity implements View.OnClickListen
         super.initViews();
         imageView = findViewById(R.id.iv_meinv);
         mBtStart = findViewById(R.id.bt_start);
+        mBtLocation = findViewById(R.id.bt_down);
         mBtStart.setOnClickListener(this);
+        mBtLocation.setOnClickListener(this);
     }
 
     @Override
@@ -99,12 +102,30 @@ public class DownLoadActivity extends BaseActivity implements View.OnClickListen
                     downLoad(mUrl);
                 }
                 break;
+            case R.id.bt_down:
+                test();
+                break;
         }
+    }
+
+    private void test() {
+        StorageLocationUtils.getDataDirectory();
+        StorageLocationUtils.getExternalStorageDirectory();
+        StorageLocationUtils.getRootDirectory();
+        StorageLocationUtils.getDownloadCacheDirectory();
+        StorageLocationUtils.getExternalStoragePublicDirectory();
+        StorageLocationUtils.getCacheDir(this);
+        StorageLocationUtils.getFilesDir(this);
+        StorageLocationUtils.getExternalCacheDir(this);
+        StorageLocationUtils.getExternalFilesDir(this);
+        StorageLocationUtils.getPackageResourcePath(this);
+        StorageLocationUtils.getDir(this);
+
     }
 
     private void downLoad(String url) {
         progressDialog.show();
-        String path = getExternalFilesDir(Environment.DIRECTORY_PICTURES).getAbsolutePath();
+        String path = StorageLocationUtils.getExternalCacheDir(this);;
         BaseHttpUtils.downLoad(url, path, mName + ".jpg", new BaseHttpUtils.OnDownloadListener() {
             @Override
             public void onDownloadFailed(Exception e) {
