@@ -12,6 +12,7 @@ import android.view.ViewGroup;
 import com.bumptech.glide.Glide;
 import com.wheel.daniel.okhttputils.R;
 import com.wheel.daniel.okhttputils.activity.DownLoadActivity;
+import com.wheel.daniel.okhttputils.activity.TaskManageActivity;
 import com.wheel.daniel.okhttputils.bean.Gank;
 import com.wheel.daniel.okhttputils.utils.CommonStringUtils;
 
@@ -59,7 +60,7 @@ public class GankAdapter extends RecyclerView.Adapter<BaseHolder> {
             ((NormalHolder) holder).mImageView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Intent intent = new Intent(mContext, DownLoadActivity.class);
+                    Intent intent = new Intent(mContext, TaskManageActivity.class);
                     intent.putExtra(CommonStringUtils.URL, gank.url);
                     intent.putExtra(CommonStringUtils.NAME, gank.desc);
                     mContext.startActivity(intent);
