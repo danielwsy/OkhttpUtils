@@ -18,6 +18,8 @@ import com.wheel.daniel.okhttputils.utils.StorageLocationUtils;
 import java.util.ArrayList;
 import java.util.List;
 
+import butterknife.ButterKnife;
+
 /**
  * @author danielwang
  * @Description:
@@ -35,6 +37,11 @@ public class TaskManageActivity extends BaseActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+    }
+
+    @Override
+    protected void BindButter() {
+        super.BindButter();
     }
 
     @Override

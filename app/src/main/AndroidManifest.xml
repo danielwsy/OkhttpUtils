@@ -25,6 +25,9 @@
         <activity android:name=".BaseActivity"></activity>
         <activity android:name=".activity.DownLoadActivity"></activity>
         <activity android:name=".activity.TaskManageActivity"></activity>
+        <activity android:name=".activity.EventAvtivity"></activity>
+        <activity android:name=".activity.GankActivity"></activity>
+
     </application>
 
 </manifest>

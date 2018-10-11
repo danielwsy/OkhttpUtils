@@ -7,11 +7,20 @@
     tools:context="com.wheel.daniel.okhttputils.activity.GankActivity">
 
     <android.support.v7.widget.RecyclerView
-        android:id="@+id/rc"
+        android:id="@+id/recycleview"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
     </android.support.v7.widget.RecyclerView>
 
+
+    <com.wheel.daniel.okhttputils.view.LoadingView
+        android:id="@+id/loading"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:visibility="gone">
+
+    </com.wheel.daniel.okhttputils.view.LoadingView>
 
 </RelativeLayout>

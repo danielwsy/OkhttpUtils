@@ -26,6 +26,8 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 
+import butterknife.ButterKnife;
+
 /**
  * @author danielwang
  * @Description:
@@ -68,6 +70,11 @@ public class DownLoadActivity extends BaseActivity implements View.OnClickListen
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+    }
+
+    @Override
+    protected void BindButter() {
+        super.BindButter();
     }
 
     @Override
@@ -125,7 +132,8 @@ public class DownLoadActivity extends BaseActivity implements View.OnClickListen
 
     private void downLoad(String url) {
         progressDialog.show();
-        String path = StorageLocationUtils.getExternalCacheDir(this);;
+        String path = StorageLocationUtils.getExternalCacheDir(this);
+        ;
         BaseHttpUtils.downLoad(url, path, mName + ".jpg", new BaseHttpUtils.OnDownloadListener() {
             @Override
             public void onDownloadFailed(Exception e) {

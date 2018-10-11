@@ -60,7 +60,7 @@ public class GankAdapter extends RecyclerView.Adapter<BaseHolder> {
             ((NormalHolder) holder).mImageView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Intent intent = new Intent(mContext, TaskManageActivity.class);
+                    Intent intent = new Intent(mContext, DownLoadActivity.class);
                     intent.putExtra(CommonStringUtils.URL, gank.url);
                     intent.putExtra(CommonStringUtils.NAME, gank.desc);
                     mContext.startActivity(intent);

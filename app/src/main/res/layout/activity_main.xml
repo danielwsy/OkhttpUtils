@@ -1,26 +1,35 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.wheel.daniel.okhttputils.activity.MainActivity">
+    android:orientation="vertical"
+    tools:context="com.wheel.daniel.okhttputils.activity.GankActivity">
 
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/recycleview"
+    <Button
+        android:id="@+id/gank"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="50dp"
+        android:layout_marginTop="20dp"
+        android:gravity="center"
+        android:text="OKHttp + Retrofit +ViewModel" />
 
-    </android.support.v7.widget.RecyclerView>
-
-
-    <com.wheel.daniel.okhttputils.view.LoadingView
-        android:id="@+id/loading"
+    <Button
+        android:id="@+id/event"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
-        android:visibility="gone">
+        android:layout_height="50dp"
+        android:layout_marginTop="20dp"
+        android:gravity="center"
+        android:text="EventBus" />
 
-    </com.wheel.daniel.okhttputils.view.LoadingView>
+    <Button
+        android:id="@+id/down"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginTop="20dp"
+        android:gravity="center"
+        android:text="多线程下载" />
 
-</RelativeLayout>
+
+</LinearLayout>
