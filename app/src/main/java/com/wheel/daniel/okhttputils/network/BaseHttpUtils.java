@@ -36,6 +36,8 @@ public class BaseHttpUtils {
     private Context mContext;
     private Retrofit mRetrofit;
     public static Hashtable<String, BaseHttpUtils> cacheMap = new Hashtable<>();
+    //space+默认不进行压缩，鹰眼api时候需要设置为true
+    private static boolean isGzipEncode = false;
 
     public static BaseHttpUtils getInstance(String serverUrl) {
         BaseHttpUtils baseHttpUtils = cacheMap.get(serverUrl);
@@ -78,6 +80,7 @@ public class BaseHttpUtils {
             okHttpClient = okBuilder.build();
         }
         builder.client(okHttpClient);
+        builder.addConverterFactory(new StringConverterFactory());
         builder.addConverterFactory(GsonConverterFactory.create());
         builder.baseUrl(mServerUrl);
         return builder.build();
@@ -86,6 +89,7 @@ public class BaseHttpUtils {
     private static OkHttpClient.Builder buildDefalutClient(Context context) {
         OkHttpClient.Builder builder = new OkHttpClient.Builder();
         builder.cache(new Cache(context.getCacheDir(), CACHE_SIZE));
+        builder.addInterceptor(new DefaultCacheInterceptor(context, isGzipEncode));
         builder.connectTimeout(NETWORK_TIME_OUT, TimeUnit.SECONDS);
         builder.readTimeout(NETWORK_TIME_OUT, TimeUnit.SECONDS);
         builder.writeTimeout(NETWORK_TIME_OUT, TimeUnit.SECONDS);
