@@ -19,26 +19,26 @@ public class GankModel extends ViewModel {
 
     private MutableLiveData<GankContentBean> liveData = new MutableLiveData<>();
 
+
     public void setValue(GankContentBean item) {
-        liveData.setValue(item);
+        //在UI线程中调用
+//        liveData.setValue(item);
+        //在子线程中调用
+        liveData.postValue(item);
     }
 
     public LiveData<GankContentBean> getValue() {
         return liveData;
     }
 
-    public void loadData(final Handler handler) {
+
+    public void loadData() {
         Runnable runnable = new Runnable() {
             @Override
             public void run() {
                 final GankContentBean bean = GankContentMgmt.getMovieContents();
                 if (bean != null) {
-                    handler.post(new Runnable() {
-                        @Override
-                        public void run() {
-                            setValue(bean);
-                        }
-                    });
+                    setValue(bean);
                 }
             }
         };

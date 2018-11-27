@@ -16,7 +16,6 @@ public class GankObserver implements LifecycleObserver {
 
     private GankModel gankModel;
     private FragmentActivity mContenxt;
-    private Handler mHandler = new Handler();
 
     public GankObserver(FragmentActivity contenxt) {
         mContenxt = contenxt;
@@ -25,7 +24,7 @@ public class GankObserver implements LifecycleObserver {
     @OnLifecycleEvent(Lifecycle.Event.ON_CREATE)
     public void onCreate() {
         gankModel = ViewModelProviders.of(mContenxt).get(GankModel.class);
-        gankModel.loadData(mHandler);
+        gankModel.loadData();
     }
 
     @OnLifecycleEvent(Lifecycle.Event.ON_START)
