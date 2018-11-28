@@ -17,6 +17,7 @@ import com.wheel.daniel.okhttputils.utils.ThreadMgrUtils;
  */
 public class GankModel extends ViewModel {
 
+    //将需要监听的实体类放入
     private MutableLiveData<GankContentBean> liveData = new MutableLiveData<>();
 
 

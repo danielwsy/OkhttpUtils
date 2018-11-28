@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context="com.wheel.daniel.okhttputils.activity.GankActivity">
+    tools:context="com.wheel.daniel.okhttputils.viewmodel.GankActivity">
 
     <Button
         android:id="@+id/gank"

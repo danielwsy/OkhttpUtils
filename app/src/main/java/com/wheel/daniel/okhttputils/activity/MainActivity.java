@@ -8,10 +8,9 @@ import android.widget.Button;
 import com.wheel.daniel.okhttputils.BaseActivity;
 import com.wheel.daniel.okhttputils.R;
 import com.wheel.daniel.okhttputils.R2;
-import com.wheel.daniel.okhttputils.bean.Gank;
+import com.wheel.daniel.okhttputils.viewmodel.GankActivity;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 /**

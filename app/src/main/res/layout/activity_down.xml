@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.wheel.daniel.okhttputils.activity.GankActivity">
+    tools:context="com.wheel.daniel.okhttputils.viewmodel.GankActivity">
 
     <ImageView
         android:id="@+id/iv_meinv"
